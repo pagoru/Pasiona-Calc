@@ -54,9 +54,10 @@ namespace Calculadora2
 
         //Operaciones con display y la numeración de esta
 
-        private static double displayNumber = 0;
+        private static long displayNumber = 0;
+        private static long displayNumberComma = 0;
 
-        public static void addDisplayNumber(Label display, double number)
+        public static void addDisplayNumber(Label display, int number)
         {
             String displayText = Convert.ToString(displayNumber);
             String newNumber = Convert.ToString(number);
@@ -64,14 +65,22 @@ namespace Calculadora2
 
             if (display.Text.Contains(','))
             {
-                currentNumber = displayText + "," + newNumber;
+                currentNumber = Convert.ToString(displayNumberComma) + newNumber;
             }
-
-            if (double.Parse(currentNumber).ToString().Length > 14)
+            
+            if (displayText.Length > 13)
             {
                 return;
             }
-            displayNumber = double.Parse(currentNumber);
+
+            if (display.Text.Contains(','))
+            {
+                displayNumberComma = long.Parse(currentNumber);
+                display.Text = Convert.ToString(displayNumber + "," + displayNumberComma);
+                return;
+            }
+
+            displayNumber = long.Parse(currentNumber);
             display.Text = Convert.ToString(displayNumber);
         }
 
@@ -94,7 +103,7 @@ namespace Calculadora2
                 display.Text = "0";
                 return;
             }
-            displayNumber = double.Parse(displayText.Substring(0, displayText.Length - 1));
+            displayNumber = long.Parse(displayText.Substring(0, displayText.Length - 1));
             display.Text = Convert.ToString(displayNumber);
         }
         public static void toggleDisplayNumberSymbol(Label display)
@@ -108,7 +117,7 @@ namespace Calculadora2
             {
                 return;
             }
-            display.Text += ",0";
+            display.Text += ",";
         }
     }
 }
