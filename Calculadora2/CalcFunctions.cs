@@ -68,7 +68,7 @@ namespace Calculadora2
                 currentNumber = Convert.ToString(displayNumberComma) + newNumber;
             }
             
-            if (displayText.Length > 13)
+            if (display.Text.Length > 13)
             {
                 return;
             }
@@ -79,20 +79,23 @@ namespace Calculadora2
                 display.Text = Convert.ToString(displayNumber + "," + displayNumberComma);
                 return;
             }
-
             displayNumber = long.Parse(currentNumber);
             display.Text = Convert.ToString(displayNumber);
         }
 
         public static void removeDisplayNumber(Label display)
         {
-            displayNumber = 0;
+            displayNumber = displayNumberComma = 0;
             display.Text = "0";
         }
         public static void removeLastDisplayNumber(Label display)
         {
             String displayText = Convert.ToString(displayNumber);
-            
+            if (display.Text.Contains(","))
+            {
+                displayText += "," + Convert.ToString(displayNumberComma);
+            }
+
             if(displayText.Length == 1)
             {
                 if (displayText.Equals("0"))
@@ -103,7 +106,27 @@ namespace Calculadora2
                 display.Text = "0";
                 return;
             }
-            displayNumber = long.Parse(displayText.Substring(0, displayText.Length - 1));
+
+            String[] numbers = displayText.Split(',');
+            if (numbers.Length == 1 && !display.Text.Contains(","))
+            {
+                displayNumber = long.Parse(numbers[0].Substring(0, numbers[0].Length - 1));
+                display.Text = Convert.ToString(displayNumber);
+                return;
+            }
+            else if (numbers.Length == 2 
+                && !display.Text.Substring(display.Text.Length - 1, 1).Equals(","))
+            {
+                if(numbers[1].Length != 1)
+                {
+                    displayNumberComma = long.Parse(numbers[1].Substring(0, numbers[1].Length - 1));
+                    display.Text = Convert.ToString(displayNumber + "," + displayNumberComma);
+                    return;
+                }
+                displayNumberComma = 0;
+                display.Text = Convert.ToString(displayNumber + ",");
+                return;
+            }
             display.Text = Convert.ToString(displayNumber);
         }
         public static void toggleDisplayNumberSymbol(Label display)
@@ -113,6 +136,10 @@ namespace Calculadora2
         }
         public static void appendDisplayComma(Label display)
         {
+            if (display.Text.Length > 13)
+            {
+                return;
+            }
             if (display.Text.Contains(','))
             {
                 return;
