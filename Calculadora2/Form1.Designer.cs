@@ -97,6 +97,7 @@
             this.button_C.TabIndex = 3;
             this.button_C.Text = "C";
             this.button_C.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.button_C.MouseUp += new System.Windows.Forms.MouseEventHandler(this.button_C_MouseUp);
             // 
             // button_Return
             // 
@@ -120,6 +121,7 @@
             this.button_Division.TabIndex = 5;
             this.button_Division.Text = "÷";
             this.button_Division.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.button_Division.MouseUp += new System.Windows.Forms.MouseEventHandler(this.button_Division_MouseUp);
             // 
             // button_Multiplication
             // 
@@ -131,6 +133,7 @@
             this.button_Multiplication.TabIndex = 9;
             this.button_Multiplication.Text = "✕";
             this.button_Multiplication.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.button_Multiplication.MouseUp += new System.Windows.Forms.MouseEventHandler(this.button_Multiplication_MouseUp);
             // 
             // button_9
             // 
@@ -178,6 +181,7 @@
             this.button_Plus.TabIndex = 17;
             this.button_Plus.Text = "＋";
             this.button_Plus.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.button_Plus.MouseUp += new System.Windows.Forms.MouseEventHandler(this.button_Plus_MouseUp);
             // 
             // button_3
             // 
@@ -225,6 +229,7 @@
             this.button_Minus.TabIndex = 13;
             this.button_Minus.Text = "–";
             this.button_Minus.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.button_Minus.MouseUp += new System.Windows.Forms.MouseEventHandler(this.button_Minus_MouseUp);
             // 
             // button_6
             // 
@@ -272,6 +277,7 @@
             this.button_Equals.TabIndex = 21;
             this.button_Equals.Text = "＝";
             this.button_Equals.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.button_Equals.MouseUp += new System.Windows.Forms.MouseEventHandler(this.button_Equals_MouseUp);
             // 
             // button_Comma
             // 

@@ -10,7 +10,7 @@ namespace Calculadora2
 {
     class CalcFunctions
     {
-        
+
         public static void basicbutton(Label label)
         {
             label.MouseDown += (sender, e) =>
@@ -52,99 +52,195 @@ namespace Calculadora2
             label.BackColor = SystemColors.ControlLight;
         }
 
-        //Operaciones con display y la numeración de esta
+        private Label display;
+        private Label savedDisplay;
 
-        private static long displayNumber = 0;
-        private static long displayNumberComma = 0;
+        private bool comma;
 
-        public static void addDisplayNumber(Label display, int number)
+        public CalcFunctions(Label display, Label savedDisplay)
         {
-            String displayText = Convert.ToString(displayNumber);
-            String newNumber = Convert.ToString(number);
-            String currentNumber = displayText + newNumber;
+            this.display = display;
+            this.savedDisplay = savedDisplay;
 
-            if (display.Text.Contains(','))
+            comma = false;
+        }
+
+        //Operaciones con display y la numeración de esta
+        
+        public void addDisplayNumber(int number)
+        {
+            String displayText = display.Text;
+            String newNumber = Convert.ToString(number);
+            
+            if (displayText.Length > 13)
             {
-                currentNumber = Convert.ToString(displayNumberComma) + newNumber;
+                return;
+            }
+
+            if(displayText.StartsWith("0") && !comma)
+            {
+                display.Text = Convert.ToString(number);
+                return;
             }
             
-            if (display.Text.Length > 13)
-            {
-                return;
-            }
-
-            if (display.Text.Contains(','))
-            {
-                displayNumberComma = long.Parse(currentNumber);
-                display.Text = Convert.ToString(displayNumber + "," + displayNumberComma);
-                return;
-            }
-            displayNumber = long.Parse(currentNumber);
-            display.Text = Convert.ToString(displayNumber);
+            display.Text += ((!displayText.Contains(',') && comma) ? "," : "") + number;
         }
 
-        public static void removeDisplayNumber(Label display)
+        public void removeDisplays()
         {
-            displayNumber = displayNumberComma = 0;
+            removeDisplayNumber();
+            savedDisplay.Text = "";
+        }
+
+        public void removeDisplayNumber()
+        {
+            comma = false;
             display.Text = "0";
         }
-        public static void removeLastDisplayNumber(Label display)
+        public void removeLastDisplayNumber()
         {
-            String displayText = Convert.ToString(displayNumber);
-            if (display.Text.Contains(","))
+            String displayText = display.Text;
+            if(displayText.Length > 1)
             {
-                displayText += "," + Convert.ToString(displayNumberComma);
+                if (displayText.Substring(displayText.Length - 1, 1).Equals(","))
+                {
+                    comma = false;
+                }
             }
 
             if(displayText.Length == 1)
             {
-                if (displayText.Equals("0"))
-                {
-                    return;
-                }
-                displayNumber = 0;
                 display.Text = "0";
                 return;
             }
 
-            String[] numbers = displayText.Split(',');
-            if (numbers.Length == 1 && !display.Text.Contains(","))
-            {
-                displayNumber = long.Parse(numbers[0].Substring(0, numbers[0].Length - 1));
-                display.Text = Convert.ToString(displayNumber);
-                return;
-            }
-            else if (numbers.Length == 2 
-                && !display.Text.Substring(display.Text.Length - 1, 1).Equals(","))
-            {
-                if(numbers[1].Length != 1)
-                {
-                    displayNumberComma = long.Parse(numbers[1].Substring(0, numbers[1].Length - 1));
-                    display.Text = Convert.ToString(displayNumber + "," + displayNumberComma);
-                    return;
-                }
-                displayNumberComma = 0;
-                display.Text = Convert.ToString(displayNumber + ",");
-                return;
-            }
-            display.Text = Convert.ToString(displayNumber);
+            display.Text = displayText.Substring(0, displayText.Length - 1);
         }
-        public static void toggleDisplayNumberSymbol(Label display)
+        public void toggleDisplayNumberSymbol()
         {
-            displayNumber = (-displayNumber);
-            display.Text = Convert.ToString(displayNumber);
+            String displayText = display.Text;
+            display.Text = displayText.StartsWith("-") ? displayText.Substring(1, displayText.Length - 1) : "-" + displayText;
         }
-        public static void appendDisplayComma(Label display)
+        public void appendDisplayComma()
         {
             if (display.Text.Length > 13)
             {
                 return;
             }
-            if (display.Text.Contains(','))
+            if (comma)
             {
                 return;
             }
             display.Text += ",";
+            comma = true;
+        }
+
+        //Operaciones
+
+
+        private void doOperations()
+        {
+
+        }
+
+        private bool saveDisplayNumber(String symbol)
+        {
+            String savedDisplayText = savedDisplay.Text;
+            String displayText = display.Text;
+
+            if(savedDisplayText.Length + displayText.Length + 3 > 34)
+            {
+                return false;
+            }
+            
+            double displayNumber = double.Parse(displayText);
+            if (savedDisplayText.Length == 0)
+            {
+                savedDisplay.Text += displayNumber + " " + symbol + " ";
+                removeDisplayNumber();
+                return false;
+            }
+            String lastCharSavedDisplayText = savedDisplayText.Substring(savedDisplayText.Length - 2, 2);
+            
+            if (!lastCharSavedDisplayText.Equals("+ ")
+                && !lastCharSavedDisplayText.Equals("- ")
+                && !lastCharSavedDisplayText.Equals("* ")
+                && !lastCharSavedDisplayText.Equals("/ "))
+            {
+                return false;
+            }
+            savedDisplay.Text.Replace(lastCharSavedDisplayText.Substring(1, 1), symbol);
+            savedDisplay.Text += displayNumber;
+            removeDisplayNumber();
+            if (lastCharSavedDisplayText.Length != 0)
+            {
+                return true;
+            }
+            return false;
+        }
+
+        private bool isSavedDisplayAvailable()
+        {
+            display.Text = savedDisplay.Text.Length + "-" + savedDisplay.Text.Equals("Error");
+            if (savedDisplay.Text.Length == 0 || savedDisplay.Text.Equals("Error"))
+            {
+                savedDisplay.Text = "";
+                return false;
+            }
+            return true;
+        }
+
+        public void addNumber(char symbol)
+        {
+            if (!saveDisplayNumber(Convert.ToString(symbol)))
+            {
+                return;
+            }
+            if (!isSavedDisplayAvailable())
+            {
+                return;
+            }
+            calcNumbers(symbol);
+        }
+
+        public void calculateResult()
+        {
+            if (isSavedDisplayAvailable())
+            {
+                calcNumbers('\0');
+            }
+        }
+
+        private void calcNumbers(char symbol)
+        {
+            char trueSymbol = char.Parse(savedDisplay.Text.Split(' ')[1]);
+            String[] numbers = savedDisplay.Text.Split(trueSymbol);
+            if (numbers.Length < 2)
+            {
+                return;
+            }
+            double[] dNumbers = { double.Parse(numbers[0]), numbers[1].Equals(" ") ? 0 : double.Parse(numbers[1]) };
+            double result = 0;
+            bool error = false;
+
+            switch (trueSymbol)
+            {
+                case '+':
+                    result = dNumbers[0] + dNumbers[1];
+                    break;
+                case '-':
+                    result = dNumbers[0] - dNumbers[1];
+                    break;
+                case '*':
+                    result = dNumbers[0] * dNumbers[1];
+                    break;
+                case '/':
+                    error = (dNumbers[1] == 0);
+                    result = dNumbers[0] / dNumbers[1];
+                    break;
+            }
+            savedDisplay.Text = error ? "Error" : Convert.ToString(result + " " + (symbol.Equals('\0') ? trueSymbol : symbol) + " ");
+            removeDisplayNumber();
         }
     }
 }
