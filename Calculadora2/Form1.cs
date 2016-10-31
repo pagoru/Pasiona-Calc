@@ -57,7 +57,7 @@ namespace Calculadora2
             }
             else if (e.KeyCode == Keys.Delete)
             {
-                calcFunctions.removeDisplayNumber();
+                calcFunctions.removeDisplays();
             }
             else if (e.KeyCode == Keys.Back)
             {
