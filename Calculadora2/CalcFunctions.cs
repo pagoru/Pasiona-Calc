@@ -258,7 +258,7 @@ namespace Calculadora2
                     break;
             }
             savedDisplay.Text = error ? "Error" : Convert.ToString(result + " " + (symbol.Equals('\0') ? trueSymbol : symbol) + " ");
-            removeDisplayNumber();
+            //removeDisplayNumber();
         }
     }
 }
