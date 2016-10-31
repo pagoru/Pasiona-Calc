@@ -205,6 +205,7 @@ namespace Calculadora2
 
         public void calculateResult()
         {
+            display.Text = Convert.ToString(isSavedDisplayAvailable()) + "<-";
             if (isSavedDisplayAvailable())
             {
                 calcNumbers('\0');
@@ -219,7 +220,12 @@ namespace Calculadora2
             {
                 return;
             }
-            double[] dNumbers = { double.Parse(numbers[0]), numbers[1].Equals(" ") ? 0 : double.Parse(numbers[1]) };
+            double[] dNumbers =
+            {
+                double.Parse(numbers[0]), numbers[1].Equals(" ") 
+                ? 0 
+                : double.Parse(numbers[1])
+            };
             double result = 0;
             bool error = false;
 

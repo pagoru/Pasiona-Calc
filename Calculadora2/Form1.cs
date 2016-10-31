@@ -188,5 +188,6 @@ namespace Calculadora2
         {
             calcFunctions.calculateResult();
         }
+        
     }
 }
