@@ -65,19 +65,19 @@ namespace Calculadora2
             }
             else if (e.KeyCode == Keys.Add)
             {
-                calcFunctions.addNumber('+');
+                calcFunctions.addOperator('+');
             }
             else if (e.KeyCode == Keys.Subtract)
             {
-                calcFunctions.addNumber('-');
+                calcFunctions.addOperator('-');
             }
             else if (e.KeyCode == Keys.Multiply)
             {
-                calcFunctions.addNumber('*');
+                calcFunctions.addOperator('*');
             }
             else if (e.KeyCode == Keys.Divide)
             {
-                calcFunctions.addNumber('/');
+                calcFunctions.addOperator('/');
             }
             else if (e.KeyCode == Keys.Decimal || e.KeyCode == Keys.Oemcomma)
             {
@@ -166,22 +166,22 @@ namespace Calculadora2
 
         private void button_Plus_MouseUp(object sender, MouseEventArgs e)
         {
-            calcFunctions.addNumber('+');
+            calcFunctions.addOperator('+');
         }
 
         private void button_Minus_MouseUp(object sender, MouseEventArgs e)
         {
-            calcFunctions.addNumber('-');
+            calcFunctions.addOperator('-');
         }
 
         private void button_Multiplication_MouseUp(object sender, MouseEventArgs e)
         {
-            calcFunctions.addNumber('*');
+            calcFunctions.addOperator('*');
         }
 
         private void button_Division_MouseUp(object sender, MouseEventArgs e)
         {
-            calcFunctions.addNumber('/');
+            calcFunctions.addOperator('/');
         }
 
         private void button_Equals_MouseUp(object sender, MouseEventArgs e)

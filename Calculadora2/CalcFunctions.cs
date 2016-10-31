@@ -181,8 +181,7 @@ namespace Calculadora2
 
         private bool isSavedDisplayAvailable()
         {
-            display.Text = savedDisplay.Text.Length + "-" + savedDisplay.Text.Equals("Error");
-            if (savedDisplay.Text.Length == 0 || savedDisplay.Text.Equals("Error"))
+            if (savedDisplay.Text.Length == 0)
             {
                 savedDisplay.Text = "";
                 return false;
@@ -190,8 +189,9 @@ namespace Calculadora2
             return true;
         }
 
-        public void addNumber(char symbol)
+        public void addOperator(char symbol)
         {
+            detectSavedDisplayError();
             if (!saveDisplayNumber(Convert.ToString(symbol)))
             {
                 return;
@@ -203,9 +203,17 @@ namespace Calculadora2
             calcNumbers(symbol);
         }
 
+        private void detectSavedDisplayError()
+        {
+            if (savedDisplay.Text.Equals("Error"))
+            {
+                savedDisplay.Text = "";
+            }
+        }
+
         public void calculateResult()
         {
-            display.Text = Convert.ToString(isSavedDisplayAvailable()) + "<-";
+            detectSavedDisplayError();
             if (isSavedDisplayAvailable())
             {
                 calcNumbers('\0');
@@ -216,6 +224,10 @@ namespace Calculadora2
         {
             char trueSymbol = char.Parse(savedDisplay.Text.Split(' ')[1]);
             String[] numbers = savedDisplay.Text.Split(trueSymbol);
+            if (symbol.Equals('\0'))
+            {
+                numbers[1] = display.Text;
+            }
             if (numbers.Length < 2)
             {
                 return;
