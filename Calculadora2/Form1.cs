@@ -18,26 +18,7 @@ namespace Calculadora2
         {
             InitializeComponent();
 
-            CalcFunctions.basicbutton(button_0);
-            CalcFunctions.basicbutton(button_1);
-            CalcFunctions.basicbutton(button_2);
-            CalcFunctions.basicbutton(button_3);
-            CalcFunctions.basicbutton(button_4);
-            CalcFunctions.basicbutton(button_5);
-            CalcFunctions.basicbutton(button_6);
-            CalcFunctions.basicbutton(button_7);
-            CalcFunctions.basicbutton(button_8);
-            CalcFunctions.basicbutton(button_9);
-            CalcFunctions.basicbutton(button_CE);
-            CalcFunctions.basicbutton(button_C);
-            CalcFunctions.basicbutton(button_Return);
-            CalcFunctions.basicbutton(button_Division);
-            CalcFunctions.basicbutton(button_Multiplication);
-            CalcFunctions.basicbutton(button_Plus);
-            CalcFunctions.basicbutton(button_Minus);
-            CalcFunctions.basicbutton(button_Equals);
-            CalcFunctions.basicbutton(button_Comma);
-            CalcFunctions.basicbutton(button_PlusMinus);
+            designBasicButtons();
 
             display.Text = "0";
             savedDisplay.Text = "";
@@ -45,149 +26,118 @@ namespace Calculadora2
             calcFunctions = new CalcFunctions(display, savedDisplay);
         }
 
+        private void designBasicButtons()
+        {
+            SimpleButton.designLabelToBasicButton(button_0);
+            SimpleButton.designLabelToBasicButton(button_1);
+            SimpleButton.designLabelToBasicButton(button_2);
+            SimpleButton.designLabelToBasicButton(button_3);
+            SimpleButton.designLabelToBasicButton(button_4);
+            SimpleButton.designLabelToBasicButton(button_5);
+            SimpleButton.designLabelToBasicButton(button_6);
+            SimpleButton.designLabelToBasicButton(button_7);
+            SimpleButton.designLabelToBasicButton(button_8);
+            SimpleButton.designLabelToBasicButton(button_9);
+            SimpleButton.designLabelToBasicButton(button_CE);
+            SimpleButton.designLabelToBasicButton(button_C);
+            SimpleButton.designLabelToBasicButton(button_Return);
+            SimpleButton.designLabelToBasicButton(button_Division);
+            SimpleButton.designLabelToBasicButton(button_Multiplication);
+            SimpleButton.designLabelToBasicButton(button_Plus);
+            SimpleButton.designLabelToBasicButton(button_Minus);
+            SimpleButton.designLabelToBasicButton(button_Equals);
+            SimpleButton.designLabelToBasicButton(button_Comma);
+            SimpleButton.designLabelToBasicButton(button_PlusMinus);
+        }
+
         private void calc_KeyUp(object sender, KeyEventArgs e)
         {
-            if (e.KeyCode >= Keys.D0 && e.KeyCode <= Keys.D9)
+            Keys keyCode = e.KeyCode;
+            int keyValue = e.KeyValue;
+
+            if (keyCode >= Keys.D0 && keyCode <= Keys.D9)
             {
-                calcFunctions.addDisplayNumber((e.KeyValue - ((int)Keys.D0)));
+                calcFunctions.addDisplayNumber((keyValue - ((int)Keys.D0)));
             }
-            else if (e.KeyCode >= Keys.NumPad0 && e.KeyCode <= Keys.NumPad9)
+            else if (keyCode >= Keys.NumPad0 && keyCode <= Keys.NumPad9)
             {
-                calcFunctions.addDisplayNumber((e.KeyValue - ((int)Keys.NumPad0)));
+                calcFunctions.addDisplayNumber((keyValue - ((int)Keys.NumPad0)));
             }
-            else if (e.KeyCode == Keys.Delete)
+            else if (keyCode == Keys.Delete)
             {
                 calcFunctions.removeDisplays();
             }
-            else if (e.KeyCode == Keys.Back)
+            else if (keyCode == Keys.Back)
             {
                 calcFunctions.removeLastDisplayNumber();
             }
-            else if (e.KeyCode == Keys.Add)
+            else if (keyCode == Keys.Add)
             {
                 calcFunctions.addOperator('+');
             }
-            else if (e.KeyCode == Keys.Subtract)
+            else if (keyCode == Keys.Subtract)
             {
                 calcFunctions.addOperator('-');
             }
-            else if (e.KeyCode == Keys.Multiply)
+            else if (keyCode == Keys.Multiply)
             {
                 calcFunctions.addOperator('*');
             }
-            else if (e.KeyCode == Keys.Divide)
+            else if (keyCode == Keys.Divide)
             {
-                calcFunctions.addOperator('/');
+                calcFunctions.addOperator('/');//TODO Cambiar operadores a simbolos.
             }
-            else if (e.KeyCode == Keys.Decimal || e.KeyCode == Keys.Oemcomma)
+            else if (keyCode == Keys.Decimal || keyCode == Keys.Oemcomma)
             {
                 calcFunctions.appendDisplayComma();
             }
-            else if (e.KeyCode == Keys.Return)
+            else if (keyCode == Keys.Return)
             {
                 calcFunctions.calculateResult();
             }
         }
 
-        private void button_0_MouseUp(object sender, MouseEventArgs e)
+        private void button_MouseClick(object sender, EventArgs e)
         {
-            calcFunctions.addDisplayNumber(0);
-        }
+            String labelValue = ((Label)sender).Text;
+            int labelNumValue = 0;
 
-        private void button_1_MouseUp(object sender, MouseEventArgs e)
-        {
-            calcFunctions.addDisplayNumber(1);
-        }
+            if (int.TryParse(labelValue, out labelNumValue))
+            {
+                if (labelNumValue >= 0 && labelNumValue <= 9)
+                {
+                    calcFunctions.addDisplayNumber(labelNumValue);
+                }
+                return;
+            }
+            switch (labelValue)
+            {
+                case "CE":
+                    calcFunctions.removeDisplayNumber();
+                    break;
+                case "⌫":
+                    calcFunctions.removeLastDisplayNumber();
+                    break;
+                case "C":
+                    calcFunctions.removeDisplays();
+                    break;
+                case "±":
+                    calcFunctions.toggleDisplayNumberSymbol();
+                    break;
+                case ",":
+                    calcFunctions.appendDisplayComma();
+                    break;
+                case "＋":
+                case "–":
+                case "✕":
+                case "÷":
+                    calcFunctions.addOperator(labelValue.ToCharArray()[0]);
+                    break;
+                case "=":
+                    calcFunctions.calculateResult();
+                    break;
 
-        private void button_2_MouseUp(object sender, MouseEventArgs e)
-        {
-            calcFunctions.addDisplayNumber(2);
+            }
         }
-
-        private void button_3_MouseUp(object sender, MouseEventArgs e)
-        {
-            calcFunctions.addDisplayNumber(3);
-        }
-
-        private void button_4_MouseUp(object sender, MouseEventArgs e)
-        {
-            calcFunctions.addDisplayNumber(4);
-        }
-
-        private void button_5_MouseUp(object sender, MouseEventArgs e)
-        {
-            calcFunctions.addDisplayNumber(5);
-        }
-
-        private void button_6_MouseUp(object sender, MouseEventArgs e)
-        {
-            calcFunctions.addDisplayNumber(6);
-        }
-
-        private void button_7_MouseUp(object sender, MouseEventArgs e)
-        {
-            calcFunctions.addDisplayNumber(7);
-        }
-
-        private void button_8_MouseUp(object sender, MouseEventArgs e)
-        {
-            calcFunctions.addDisplayNumber(8);
-        }
-
-        private void button_9_MouseUp(object sender, MouseEventArgs e)
-        {
-            calcFunctions.addDisplayNumber(9);
-        }
-
-        private void button_CE_MouseUp(object sender, MouseEventArgs e)
-        {
-            calcFunctions.removeDisplayNumber();
-        }
-
-        private void button_Return_MouseUp(object sender, MouseEventArgs e)
-        {
-            calcFunctions.removeLastDisplayNumber();
-        }
-
-        private void button_C_MouseUp(object sender, MouseEventArgs e)
-        {
-            calcFunctions.removeDisplays();
-        }
-
-        private void button_PlusMinus_MouseUp(object sender, MouseEventArgs e)
-        {
-            calcFunctions.toggleDisplayNumberSymbol();
-        }
-
-        private void button_Comma_MouseUp(object sender, MouseEventArgs e)
-        {
-            calcFunctions.appendDisplayComma();
-        }
-
-        private void button_Plus_MouseUp(object sender, MouseEventArgs e)
-        {
-            calcFunctions.addOperator('+');
-        }
-
-        private void button_Minus_MouseUp(object sender, MouseEventArgs e)
-        {
-            calcFunctions.addOperator('-');
-        }
-
-        private void button_Multiplication_MouseUp(object sender, MouseEventArgs e)
-        {
-            calcFunctions.addOperator('*');
-        }
-
-        private void button_Division_MouseUp(object sender, MouseEventArgs e)
-        {
-            calcFunctions.addOperator('/');
-        }
-
-        private void button_Equals_MouseUp(object sender, MouseEventArgs e)
-        {
-            calcFunctions.calculateResult();
-        }
-        
     }
 }

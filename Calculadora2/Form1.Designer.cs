@@ -85,7 +85,7 @@
             this.button_CE.TabIndex = 2;
             this.button_CE.Text = "CE";
             this.button_CE.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.button_CE.MouseUp += new System.Windows.Forms.MouseEventHandler(this.button_CE_MouseUp);
+            this.button_CE.Click += new System.EventHandler(this.button_MouseClick);
             // 
             // button_C
             // 
@@ -97,7 +97,7 @@
             this.button_C.TabIndex = 3;
             this.button_C.Text = "C";
             this.button_C.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.button_C.MouseUp += new System.Windows.Forms.MouseEventHandler(this.button_C_MouseUp);
+            this.button_C.Click += new System.EventHandler(this.button_MouseClick);
             // 
             // button_Return
             // 
@@ -109,7 +109,7 @@
             this.button_Return.TabIndex = 4;
             this.button_Return.Text = "⌫";
             this.button_Return.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.button_Return.MouseUp += new System.Windows.Forms.MouseEventHandler(this.button_Return_MouseUp);
+            this.button_Return.Click += new System.EventHandler(this.button_MouseClick);
             // 
             // button_Division
             // 
@@ -121,7 +121,7 @@
             this.button_Division.TabIndex = 5;
             this.button_Division.Text = "÷";
             this.button_Division.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.button_Division.MouseUp += new System.Windows.Forms.MouseEventHandler(this.button_Division_MouseUp);
+            this.button_Division.Click += new System.EventHandler(this.button_MouseClick);
             // 
             // button_Multiplication
             // 
@@ -133,7 +133,7 @@
             this.button_Multiplication.TabIndex = 9;
             this.button_Multiplication.Text = "✕";
             this.button_Multiplication.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.button_Multiplication.MouseUp += new System.Windows.Forms.MouseEventHandler(this.button_Multiplication_MouseUp);
+            this.button_Multiplication.Click += new System.EventHandler(this.button_MouseClick);
             // 
             // button_9
             // 
@@ -145,7 +145,7 @@
             this.button_9.TabIndex = 8;
             this.button_9.Text = "9";
             this.button_9.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.button_9.MouseUp += new System.Windows.Forms.MouseEventHandler(this.button_9_MouseUp);
+            this.button_9.Click += new System.EventHandler(this.button_MouseClick);
             // 
             // button_8
             // 
@@ -157,7 +157,7 @@
             this.button_8.TabIndex = 7;
             this.button_8.Text = "8";
             this.button_8.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.button_8.MouseUp += new System.Windows.Forms.MouseEventHandler(this.button_8_MouseUp);
+            this.button_8.Click += new System.EventHandler(this.button_MouseClick);
             // 
             // button_7
             // 
@@ -169,7 +169,7 @@
             this.button_7.TabIndex = 6;
             this.button_7.Text = "7";
             this.button_7.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.button_7.MouseUp += new System.Windows.Forms.MouseEventHandler(this.button_7_MouseUp);
+            this.button_7.Click += new System.EventHandler(this.button_MouseClick);
             // 
             // button_Plus
             // 
@@ -181,7 +181,7 @@
             this.button_Plus.TabIndex = 17;
             this.button_Plus.Text = "＋";
             this.button_Plus.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.button_Plus.MouseUp += new System.Windows.Forms.MouseEventHandler(this.button_Plus_MouseUp);
+            this.button_Plus.Click += new System.EventHandler(this.button_MouseClick);
             // 
             // button_3
             // 
@@ -193,7 +193,7 @@
             this.button_3.TabIndex = 16;
             this.button_3.Text = "3";
             this.button_3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.button_3.MouseUp += new System.Windows.Forms.MouseEventHandler(this.button_3_MouseUp);
+            this.button_3.Click += new System.EventHandler(this.button_MouseClick);
             // 
             // button_2
             // 
@@ -205,7 +205,7 @@
             this.button_2.TabIndex = 15;
             this.button_2.Text = "2";
             this.button_2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.button_2.MouseUp += new System.Windows.Forms.MouseEventHandler(this.button_2_MouseUp);
+            this.button_2.Click += new System.EventHandler(this.button_MouseClick);
             // 
             // button_1
             // 
@@ -217,7 +217,7 @@
             this.button_1.TabIndex = 14;
             this.button_1.Text = "1";
             this.button_1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.button_1.MouseUp += new System.Windows.Forms.MouseEventHandler(this.button_1_MouseUp);
+            this.button_1.Click += new System.EventHandler(this.button_MouseClick);
             // 
             // button_Minus
             // 
@@ -229,7 +229,7 @@
             this.button_Minus.TabIndex = 13;
             this.button_Minus.Text = "–";
             this.button_Minus.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.button_Minus.MouseUp += new System.Windows.Forms.MouseEventHandler(this.button_Minus_MouseUp);
+            this.button_Minus.Click += new System.EventHandler(this.button_MouseClick);
             // 
             // button_6
             // 
@@ -241,7 +241,7 @@
             this.button_6.TabIndex = 12;
             this.button_6.Text = "6";
             this.button_6.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.button_6.MouseUp += new System.Windows.Forms.MouseEventHandler(this.button_6_MouseUp);
+            this.button_6.Click += new System.EventHandler(this.button_MouseClick);
             // 
             // button_5
             // 
@@ -253,7 +253,7 @@
             this.button_5.TabIndex = 11;
             this.button_5.Text = "5";
             this.button_5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.button_5.MouseUp += new System.Windows.Forms.MouseEventHandler(this.button_5_MouseUp);
+            this.button_5.Click += new System.EventHandler(this.button_MouseClick);
             // 
             // button_4
             // 
@@ -265,7 +265,7 @@
             this.button_4.TabIndex = 10;
             this.button_4.Text = "4";
             this.button_4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.button_4.MouseUp += new System.Windows.Forms.MouseEventHandler(this.button_4_MouseUp);
+            this.button_4.Click += new System.EventHandler(this.button_MouseClick);
             // 
             // button_Equals
             // 
@@ -277,7 +277,7 @@
             this.button_Equals.TabIndex = 21;
             this.button_Equals.Text = "＝";
             this.button_Equals.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.button_Equals.MouseUp += new System.Windows.Forms.MouseEventHandler(this.button_Equals_MouseUp);
+            this.button_Equals.Click += new System.EventHandler(this.button_MouseClick);
             // 
             // button_Comma
             // 
@@ -289,7 +289,7 @@
             this.button_Comma.TabIndex = 20;
             this.button_Comma.Text = ",";
             this.button_Comma.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.button_Comma.MouseUp += new System.Windows.Forms.MouseEventHandler(this.button_Comma_MouseUp);
+            this.button_Comma.Click += new System.EventHandler(this.button_MouseClick);
             // 
             // button_0
             // 
@@ -301,7 +301,7 @@
             this.button_0.TabIndex = 19;
             this.button_0.Text = "0";
             this.button_0.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.button_0.MouseUp += new System.Windows.Forms.MouseEventHandler(this.button_0_MouseUp);
+            this.button_0.Click += new System.EventHandler(this.button_MouseClick);
             // 
             // button_PlusMinus
             // 
@@ -313,7 +313,7 @@
             this.button_PlusMinus.TabIndex = 18;
             this.button_PlusMinus.Text = "±";
             this.button_PlusMinus.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.button_PlusMinus.MouseUp += new System.Windows.Forms.MouseEventHandler(this.button_PlusMinus_MouseUp);
+            this.button_PlusMinus.Click += new System.EventHandler(this.button_MouseClick);
             // 
             // calc
             // 
