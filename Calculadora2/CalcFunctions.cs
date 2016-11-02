@@ -136,12 +136,7 @@ namespace Calculadora2
         }
 
         //Operaciones
-
-
-        private void doOperations()
-        {
-
-        }
+        
 
         private bool saveDisplayNumber(String symbol)
         {
