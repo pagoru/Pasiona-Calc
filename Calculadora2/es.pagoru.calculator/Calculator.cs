@@ -5,22 +5,21 @@ namespace Calculadora
 {
     class Calculator
     {
-        #region Symbolos
-        public const Char REMOVE_DISPLAY_SYMBOL = 'C';
-        public const Char REMOVE_LAST_SYMBOL = '⌫';
-
-        public const Char PLUS_MINUS_SYMBOL = '±';
-        public const Char COMMA_SYMBOL = ',';
-        public const Char EQUAL_SYMBOL = '＝';
-
-        public const Char ADD_SYMBOL = '＋';
-        public const Char SUBSTRACT_SYMBOL = '–';
-        public const Char DIVIDE_SYMBOL = '✕';
-        public const Char MULTIPLY_SYMBOL = '÷';
+        public enum Symbols : int
+        {
+            REMOVE_DISPLAY = 'C',
+            REMOVE_LAST = '⌫',
+            PLUS_MINUS = '±',
+            COMMA = ',',
+            EQUAL = '＝',
+            ADD = '＋',
+            SUBSTRACT = '–',
+            DIVIDE = '÷',
+            MULTIPLY = '✕'
+        }
 
         public const int DISPLAY_MAX_LENGTH = 13;
         public const int SAVED_DISPLAY_MAX_LENGTH = 34;
-        #endregion
         
         private String displayText;
         private String savedDisplayText;
@@ -55,7 +54,7 @@ namespace Calculadora
                 return;
             }
 
-            displayText += ((!displayText.Contains(COMMA_SYMBOL) && comma) ? COMMA_SYMBOL.ToString() : "") + number;
+            displayText += ((!displayText.Contains((Char)Symbols.COMMA) && comma) ? ((Char)Symbols.COMMA).ToString() : "") + number;
         }
 
         public void removeDisplays()
@@ -73,7 +72,7 @@ namespace Calculadora
         {
             if(displayText.Length > 1)
             {
-                if (displayText.Substring(displayText.Length - 1, 1).ToCharArray()[0].Equals(COMMA_SYMBOL))
+                if (displayText.Substring(displayText.Length - 1, 1).ToCharArray()[0].Equals((Char)Symbols.COMMA))
                 {
                     comma = false;
                 }
@@ -101,7 +100,7 @@ namespace Calculadora
             {
                 return;
             }
-            displayText += COMMA_SYMBOL;
+            displayText += Symbols.COMMA;
             comma = true;
         }
         
@@ -121,10 +120,10 @@ namespace Calculadora
             }
             Char lastCharSavedDisplayText = savedDisplayText.Substring(savedDisplayText.Length - 2, 1).ToCharArray()[0];
             
-            if (!lastCharSavedDisplayText.Equals(ADD_SYMBOL)
-                && !lastCharSavedDisplayText.Equals(SUBSTRACT_SYMBOL)
-                && !lastCharSavedDisplayText.Equals(MULTIPLY_SYMBOL)
-                && !lastCharSavedDisplayText.Equals(DIVIDE_SYMBOL))
+            if (!lastCharSavedDisplayText.Equals((Char)Symbols.ADD)
+                && !lastCharSavedDisplayText.Equals((Char)Symbols.SUBSTRACT)
+                && !lastCharSavedDisplayText.Equals((Char)Symbols.MULTIPLY)
+                && !lastCharSavedDisplayText.Equals((Char)Symbols.DIVIDE))
             {
                 return false;
             }
@@ -202,16 +201,16 @@ namespace Calculadora
 
             switch (trueSymbol)
             {
-                case ADD_SYMBOL:
+                case (Char)Symbols.ADD:
                     result = dNumbers[0] + dNumbers[1];
                     break;
-                case SUBSTRACT_SYMBOL:
+                case (Char)Symbols.SUBSTRACT:
                     result = dNumbers[0] - dNumbers[1];
                     break;
-                case MULTIPLY_SYMBOL:
+                case (Char)Symbols.MULTIPLY:
                     result = dNumbers[0] * dNumbers[1];
                     break;
-                case DIVIDE_SYMBOL:
+                case (Char)Symbols.DIVIDE:
                     error = (dNumbers[1] == 0);
                     result = dNumbers[0] / dNumbers[1];
                     break;

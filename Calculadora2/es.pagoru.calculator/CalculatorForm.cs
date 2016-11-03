@@ -64,19 +64,19 @@ namespace Calculadora
             }
             else if (keyCode == Keys.Add)
             {
-                calculator.addOperator(Calculator.ADD_SYMBOL);
+                calculator.addOperator((char)Calculator.Symbols.ADD);
             }
             else if (keyCode == Keys.Subtract)
             {
-                calculator.addOperator(Calculator.SUBSTRACT_SYMBOL);
+                calculator.addOperator((char)Calculator.Symbols.SUBSTRACT);
             }
             else if (keyCode == Keys.Multiply)
             {
-                calculator.addOperator(Calculator.MULTIPLY_SYMBOL);
+                calculator.addOperator((char)Calculator.Symbols.MULTIPLY);
             }
             else if (keyCode == Keys.Divide)
             {
-                calculator.addOperator(Calculator.DIVIDE_SYMBOL);
+                calculator.addOperator((char)Calculator.Symbols.DIVIDE);
             }
             else if (keyCode == Keys.Decimal || keyCode == Keys.Oemcomma)
             {
@@ -112,25 +112,25 @@ namespace Calculadora
             }
             switch (firstCharLabelValue)
             {
-                case Calculator.REMOVE_LAST_SYMBOL:
+                case (char)Calculator.Symbols.REMOVE_LAST:
                     calculator.removeLastDisplayNumber();
                     break;
-                case Calculator.REMOVE_DISPLAY_SYMBOL:
+                case (char)Calculator.Symbols.REMOVE_DISPLAY:
                     calculator.removeDisplays();
                     break;
-                case Calculator.PLUS_MINUS_SYMBOL:
+                case (char)Calculator.Symbols.PLUS_MINUS:
                     calculator.toggleDisplayNumberSymbol();
                     break;
-                case Calculator.COMMA_SYMBOL:
+                case (char)Calculator.Symbols.COMMA:
                     calculator.appendDisplayComma();
                     break;
-                case Calculator.ADD_SYMBOL:
-                case Calculator.SUBSTRACT_SYMBOL:
-                case Calculator.MULTIPLY_SYMBOL:
-                case Calculator.DIVIDE_SYMBOL:
+                case (char)Calculator.Symbols.ADD:
+                case (char)Calculator.Symbols.SUBSTRACT:
+                case (char)Calculator.Symbols.MULTIPLY:
+                case (char)Calculator.Symbols.DIVIDE:
                     calculator.addOperator(firstCharLabelValue);
                     break;
-                case Calculator.EQUAL_SYMBOL:
+                case (char)Calculator.Symbols.EQUAL:
                     calculator.calculateResult();
                     break;
             }
