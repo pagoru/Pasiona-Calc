@@ -192,8 +192,8 @@ namespace Calculadora
             }
             double[] dNumbers =
             {
-                double.Parse(numbers[0]), numbers[1].Equals(" ") 
-                ? 0 
+                double.Parse(numbers[0]), numbers[1].Equals(" ")
+                ? 0
                 : double.Parse(numbers[1])
             };
             double result = 0;
