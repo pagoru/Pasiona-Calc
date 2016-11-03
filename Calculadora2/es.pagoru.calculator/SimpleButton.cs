@@ -1,16 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
+﻿using System.Windows.Forms;
 using System.Drawing;
 
-namespace Calculadora2
+namespace Calculadora
 {
     class SimpleButton
     {
-        public static void designLabelToBasicButton(Label label)
+        public static void labelToBasicButton(Label label)
         {
             label.MouseDown += (sender, e) =>
             {

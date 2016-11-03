@@ -1,69 +1,79 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using System.Drawing;
 
-namespace Calculadora2
+namespace Calculadora
 {
-    class CalcFunctions
+    class Calculator
     {
+        #region Symbolos
+        public const Char REMOVE_DISPLAY_SYMBOL = 'C';
+        public const Char REMOVE_LAST_SYMBOL = '⌫';
 
+        public const Char PLUS_MINUS_SYMBOL = '±';
+        public const Char COMMA_SYMBOL = ',';
+        public const Char EQUAL_SYMBOL = '＝';
+
+        public const Char ADD_SYMBOL = '＋';
+        public const Char SUBSTRACT_SYMBOL = '–';
+        public const Char DIVIDE_SYMBOL = '✕';
+        public const Char MULTIPLY_SYMBOL = '÷';
+
+        public const int DISPLAY_MAX_LENGTH = 13;
+        public const int SAVED_DISPLAY_MAX_LENGTH = 34;
+        #endregion
         
-
-        private Label display;
-        private Label savedDisplay;
+        private String displayText;
+        private String savedDisplayText;
 
         private bool comma;
 
-        public CalcFunctions(Label display, Label savedDisplay)
+        public Calculator()
         {
-            this.display = display;
-            this.savedDisplay = savedDisplay;
+            this.displayText = "0";
+            this.savedDisplayText = "";
 
             comma = false;
         }
-
-        //Operaciones con display y la numeración de esta
+        
+        public String[] getDisplays()
+        {
+            return new String[2] { displayText, savedDisplayText };
+        }
         
         public void addDisplayNumber(int number)
         {
-            String displayText = display.Text;
             String newNumber = Convert.ToString(number);
             
-            if (displayText.Length > 13)
+            if (displayText.Length > DISPLAY_MAX_LENGTH)
             {
                 return;
             }
 
             if(displayText.StartsWith("0") && !comma)
             {
-                display.Text = Convert.ToString(number);
+                displayText = Convert.ToString(number);
                 return;
             }
-            
-            display.Text += ((!displayText.Contains(',') && comma) ? "," : "") + number;
+
+            displayText += ((!displayText.Contains(COMMA_SYMBOL) && comma) ? COMMA_SYMBOL.ToString() : "") + number;
         }
 
         public void removeDisplays()
         {
             removeDisplayNumber();
-            savedDisplay.Text = "";
+            savedDisplayText = "";
         }
 
         public void removeDisplayNumber()
         {
             comma = false;
-            display.Text = "0";
+            displayText = "0";
         }
         public void removeLastDisplayNumber()
         {
-            String displayText = display.Text;
             if(displayText.Length > 1)
             {
-                if (displayText.Substring(displayText.Length - 1, 1).Equals(","))
+                if (displayText.Substring(displayText.Length - 1, 1).ToCharArray()[0].Equals(COMMA_SYMBOL))
                 {
                     comma = false;
                 }
@@ -71,40 +81,33 @@ namespace Calculadora2
 
             if(displayText.Length == 1)
             {
-                display.Text = "0";
+                displayText = "0";
                 return;
             }
 
-            display.Text = displayText.Substring(0, displayText.Length - 1);
+            displayText = displayText.Substring(0, displayText.Length - 1);
         }
         public void toggleDisplayNumberSymbol()
         {
-            String displayText = display.Text;
-            display.Text = displayText.StartsWith("-") ? displayText.Substring(1, displayText.Length - 1) : "-" + displayText;
+            displayText = displayText.StartsWith("-") ? displayText.Substring(1, displayText.Length - 1) : "-" + displayText;
         }
         public void appendDisplayComma()
         {
-            if (display.Text.Length > 13)
-            {
-                return;
-            }
             if (comma)
             {
                 return;
             }
-            display.Text += ",";
+            if (displayText.Length > DISPLAY_MAX_LENGTH)
+            {
+                return;
+            }
+            displayText += COMMA_SYMBOL;
             comma = true;
         }
-
-        //Operaciones
         
-
-        private bool saveDisplayNumber(String symbol)
+        private bool saveDisplayNumber(Char symbol)
         {
-            String savedDisplayText = savedDisplay.Text;
-            String displayText = display.Text;
-
-            if(savedDisplayText.Length + displayText.Length + 3 > 34)
+            if(savedDisplayText.Length + displayText.Length + 3 > SAVED_DISPLAY_MAX_LENGTH)
             {
                 return false;
             }
@@ -112,23 +115,23 @@ namespace Calculadora2
             double displayNumber = double.Parse(displayText);
             if (savedDisplayText.Length == 0)
             {
-                savedDisplay.Text += displayNumber + " " + symbol + " ";
+                savedDisplayText += displayNumber + " " + symbol + " ";
                 removeDisplayNumber();
                 return false;
             }
-            String lastCharSavedDisplayText = savedDisplayText.Substring(savedDisplayText.Length - 2, 2);
+            Char lastCharSavedDisplayText = savedDisplayText.Substring(savedDisplayText.Length - 2, 1).ToCharArray()[0];
             
-            if (!lastCharSavedDisplayText.Equals("+ ")
-                && !lastCharSavedDisplayText.Equals("- ")
-                && !lastCharSavedDisplayText.Equals("* ")
-                && !lastCharSavedDisplayText.Equals("/ "))
+            if (!lastCharSavedDisplayText.Equals(ADD_SYMBOL)
+                && !lastCharSavedDisplayText.Equals(SUBSTRACT_SYMBOL)
+                && !lastCharSavedDisplayText.Equals(MULTIPLY_SYMBOL)
+                && !lastCharSavedDisplayText.Equals(DIVIDE_SYMBOL))
             {
                 return false;
             }
-            savedDisplay.Text.Replace(lastCharSavedDisplayText.Substring(1, 1), symbol);
-            savedDisplay.Text += displayNumber;
+            savedDisplayText.Replace(lastCharSavedDisplayText, symbol);
+            savedDisplayText += displayNumber;
             removeDisplayNumber();
-            if (lastCharSavedDisplayText.Length != 0)
+            if (lastCharSavedDisplayText != ' ')
             {
                 return true;
             }
@@ -137,9 +140,9 @@ namespace Calculadora2
 
         private bool isSavedDisplayAvailable()
         {
-            if (savedDisplay.Text.Length == 0)
+            if (savedDisplayText.Length == 0)
             {
-                savedDisplay.Text = "";
+                savedDisplayText = "";
                 return false;
             }
             return true;
@@ -148,7 +151,7 @@ namespace Calculadora2
         public void addOperator(char symbol)
         {
             detectSavedDisplayError();
-            if (!saveDisplayNumber(Convert.ToString(symbol)))
+            if (!saveDisplayNumber(symbol))
             {
                 return;
             }
@@ -161,9 +164,9 @@ namespace Calculadora2
 
         private void detectSavedDisplayError()
         {
-            if (savedDisplay.Text.Equals("Error"))
+            if (savedDisplayText.Equals("Error"))
             {
-                savedDisplay.Text = "";
+                savedDisplayText = "";
             }
         }
 
@@ -178,11 +181,11 @@ namespace Calculadora2
 
         private void calcNumbers(char symbol)
         {
-            char trueSymbol = char.Parse(savedDisplay.Text.Split(' ')[1]);
-            String[] numbers = savedDisplay.Text.Split(trueSymbol);
+            char trueSymbol = char.Parse(savedDisplayText.Split(' ')[1]);
+            String[] numbers = savedDisplayText.Split(trueSymbol);
             if (symbol.Equals('\0'))
             {
-                numbers[1] = display.Text;
+                numbers[1] = displayText;
             }
             if (numbers.Length < 2)
             {
@@ -199,22 +202,21 @@ namespace Calculadora2
 
             switch (trueSymbol)
             {
-                case '+':
+                case ADD_SYMBOL:
                     result = dNumbers[0] + dNumbers[1];
                     break;
-                case '-':
+                case SUBSTRACT_SYMBOL:
                     result = dNumbers[0] - dNumbers[1];
                     break;
-                case '*':
+                case MULTIPLY_SYMBOL:
                     result = dNumbers[0] * dNumbers[1];
                     break;
-                case '/':
+                case DIVIDE_SYMBOL:
                     error = (dNumbers[1] == 0);
                     result = dNumbers[0] / dNumbers[1];
                     break;
             }
-            savedDisplay.Text = error ? "Error" : Convert.ToString(result + " " + (symbol.Equals('\0') ? trueSymbol : symbol) + " ");
-            //removeDisplayNumber();
+            savedDisplayText = error ? "Error" : Convert.ToString(result + " " + (symbol.Equals('\0') ? trueSymbol : symbol) + " ");
         }
     }
 }

@@ -1,4 +1,4 @@
-﻿namespace Calculadora2
+﻿namespace Calculadora
 {
     partial class calc
     {
@@ -34,16 +34,16 @@
             this.button_CE = new System.Windows.Forms.Label();
             this.button_C = new System.Windows.Forms.Label();
             this.button_Return = new System.Windows.Forms.Label();
-            this.button_Division = new System.Windows.Forms.Label();
-            this.button_Multiplication = new System.Windows.Forms.Label();
+            this.button_Divide = new System.Windows.Forms.Label();
+            this.button_Multiply = new System.Windows.Forms.Label();
             this.button_9 = new System.Windows.Forms.Label();
             this.button_8 = new System.Windows.Forms.Label();
             this.button_7 = new System.Windows.Forms.Label();
-            this.button_Plus = new System.Windows.Forms.Label();
+            this.button_Add = new System.Windows.Forms.Label();
             this.button_3 = new System.Windows.Forms.Label();
             this.button_2 = new System.Windows.Forms.Label();
             this.button_1 = new System.Windows.Forms.Label();
-            this.button_Minus = new System.Windows.Forms.Label();
+            this.button_Substract = new System.Windows.Forms.Label();
             this.button_6 = new System.Windows.Forms.Label();
             this.button_5 = new System.Windows.Forms.Label();
             this.button_4 = new System.Windows.Forms.Label();
@@ -95,7 +95,7 @@
             this.button_C.Name = "button_C";
             this.button_C.Size = new System.Drawing.Size(64, 64);
             this.button_C.TabIndex = 3;
-            this.button_C.Text = "C";
+            this.button_C.Text = Calculator.REMOVE_DISPLAY_SYMBOL.ToString();
             this.button_C.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.button_C.Click += new System.EventHandler(this.button_MouseClick);
             // 
@@ -107,33 +107,33 @@
             this.button_Return.Name = "button_Return";
             this.button_Return.Size = new System.Drawing.Size(64, 64);
             this.button_Return.TabIndex = 4;
-            this.button_Return.Text = "⌫";
+            this.button_Return.Text = Calculator.REMOVE_LAST_SYMBOL.ToString();
             this.button_Return.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.button_Return.Click += new System.EventHandler(this.button_MouseClick);
             // 
             // button_Division
             // 
-            this.button_Division.BackColor = System.Drawing.SystemColors.ButtonFace;
-            this.button_Division.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button_Division.Location = new System.Drawing.Point(192, 105);
-            this.button_Division.Name = "button_Division";
-            this.button_Division.Size = new System.Drawing.Size(64, 64);
-            this.button_Division.TabIndex = 5;
-            this.button_Division.Text = "÷";
-            this.button_Division.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.button_Division.Click += new System.EventHandler(this.button_MouseClick);
+            this.button_Divide.BackColor = System.Drawing.SystemColors.ButtonFace;
+            this.button_Divide.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button_Divide.Location = new System.Drawing.Point(192, 105);
+            this.button_Divide.Name = "button_Division";
+            this.button_Divide.Size = new System.Drawing.Size(64, 64);
+            this.button_Divide.TabIndex = 5;
+            this.button_Divide.Text = Calculator.DIVIDE_SYMBOL.ToString();
+            this.button_Divide.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.button_Divide.Click += new System.EventHandler(this.button_MouseClick);
             // 
             // button_Multiplication
             // 
-            this.button_Multiplication.BackColor = System.Drawing.SystemColors.ButtonFace;
-            this.button_Multiplication.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button_Multiplication.Location = new System.Drawing.Point(192, 169);
-            this.button_Multiplication.Name = "button_Multiplication";
-            this.button_Multiplication.Size = new System.Drawing.Size(64, 64);
-            this.button_Multiplication.TabIndex = 9;
-            this.button_Multiplication.Text = "✕";
-            this.button_Multiplication.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.button_Multiplication.Click += new System.EventHandler(this.button_MouseClick);
+            this.button_Multiply.BackColor = System.Drawing.SystemColors.ButtonFace;
+            this.button_Multiply.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button_Multiply.Location = new System.Drawing.Point(192, 169);
+            this.button_Multiply.Name = "button_Multiplication";
+            this.button_Multiply.Size = new System.Drawing.Size(64, 64);
+            this.button_Multiply.TabIndex = 9;
+            this.button_Multiply.Text = Calculator.MULTIPLY_SYMBOL.ToString();
+            this.button_Multiply.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.button_Multiply.Click += new System.EventHandler(this.button_MouseClick);
             // 
             // button_9
             // 
@@ -173,15 +173,15 @@
             // 
             // button_Plus
             // 
-            this.button_Plus.BackColor = System.Drawing.SystemColors.ButtonFace;
-            this.button_Plus.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button_Plus.Location = new System.Drawing.Point(192, 297);
-            this.button_Plus.Name = "button_Plus";
-            this.button_Plus.Size = new System.Drawing.Size(64, 64);
-            this.button_Plus.TabIndex = 17;
-            this.button_Plus.Text = "＋";
-            this.button_Plus.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.button_Plus.Click += new System.EventHandler(this.button_MouseClick);
+            this.button_Add.BackColor = System.Drawing.SystemColors.ButtonFace;
+            this.button_Add.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button_Add.Location = new System.Drawing.Point(192, 297);
+            this.button_Add.Name = "button_Plus";
+            this.button_Add.Size = new System.Drawing.Size(64, 64);
+            this.button_Add.TabIndex = 17;
+            this.button_Add.Text = Calculator.ADD_SYMBOL.ToString();
+            this.button_Add.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.button_Add.Click += new System.EventHandler(this.button_MouseClick);
             // 
             // button_3
             // 
@@ -221,15 +221,15 @@
             // 
             // button_Minus
             // 
-            this.button_Minus.BackColor = System.Drawing.SystemColors.ButtonFace;
-            this.button_Minus.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button_Minus.Location = new System.Drawing.Point(192, 233);
-            this.button_Minus.Name = "button_Minus";
-            this.button_Minus.Size = new System.Drawing.Size(64, 64);
-            this.button_Minus.TabIndex = 13;
-            this.button_Minus.Text = "–";
-            this.button_Minus.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.button_Minus.Click += new System.EventHandler(this.button_MouseClick);
+            this.button_Substract.BackColor = System.Drawing.SystemColors.ButtonFace;
+            this.button_Substract.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button_Substract.Location = new System.Drawing.Point(192, 233);
+            this.button_Substract.Name = "button_Minus";
+            this.button_Substract.Size = new System.Drawing.Size(64, 64);
+            this.button_Substract.TabIndex = 13;
+            this.button_Substract.Text = Calculator.SUBSTRACT_SYMBOL.ToString();
+            this.button_Substract.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.button_Substract.Click += new System.EventHandler(this.button_MouseClick);
             // 
             // button_6
             // 
@@ -275,7 +275,7 @@
             this.button_Equals.Name = "button_Equals";
             this.button_Equals.Size = new System.Drawing.Size(64, 64);
             this.button_Equals.TabIndex = 21;
-            this.button_Equals.Text = "＝";
+            this.button_Equals.Text = Calculator.EQUAL_SYMBOL.ToString();
             this.button_Equals.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.button_Equals.Click += new System.EventHandler(this.button_MouseClick);
             // 
@@ -287,7 +287,7 @@
             this.button_Comma.Name = "button_Comma";
             this.button_Comma.Size = new System.Drawing.Size(64, 64);
             this.button_Comma.TabIndex = 20;
-            this.button_Comma.Text = ",";
+            this.button_Comma.Text = Calculator.COMMA_SYMBOL.ToString();
             this.button_Comma.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.button_Comma.Click += new System.EventHandler(this.button_MouseClick);
             // 
@@ -311,7 +311,7 @@
             this.button_PlusMinus.Name = "button_PlusMinus";
             this.button_PlusMinus.Size = new System.Drawing.Size(64, 64);
             this.button_PlusMinus.TabIndex = 18;
-            this.button_PlusMinus.Text = "±";
+            this.button_PlusMinus.Text = Calculator.PLUS_MINUS_SYMBOL.ToString();
             this.button_PlusMinus.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.button_PlusMinus.Click += new System.EventHandler(this.button_MouseClick);
             // 
@@ -325,19 +325,19 @@
             this.Controls.Add(this.button_Comma);
             this.Controls.Add(this.button_0);
             this.Controls.Add(this.button_PlusMinus);
-            this.Controls.Add(this.button_Plus);
+            this.Controls.Add(this.button_Add);
             this.Controls.Add(this.button_3);
             this.Controls.Add(this.button_2);
             this.Controls.Add(this.button_1);
-            this.Controls.Add(this.button_Minus);
+            this.Controls.Add(this.button_Substract);
             this.Controls.Add(this.button_6);
             this.Controls.Add(this.button_5);
             this.Controls.Add(this.button_4);
-            this.Controls.Add(this.button_Multiplication);
+            this.Controls.Add(this.button_Multiply);
             this.Controls.Add(this.button_9);
             this.Controls.Add(this.button_8);
             this.Controls.Add(this.button_7);
-            this.Controls.Add(this.button_Division);
+            this.Controls.Add(this.button_Divide);
             this.Controls.Add(this.button_Return);
             this.Controls.Add(this.button_C);
             this.Controls.Add(this.button_CE);
@@ -362,16 +362,16 @@
         private System.Windows.Forms.Label button_CE;
         private System.Windows.Forms.Label button_C;
         private System.Windows.Forms.Label button_Return;
-        private System.Windows.Forms.Label button_Division;
-        private System.Windows.Forms.Label button_Multiplication;
+        private System.Windows.Forms.Label button_Divide;
+        private System.Windows.Forms.Label button_Multiply;
         private System.Windows.Forms.Label button_9;
         private System.Windows.Forms.Label button_8;
         private System.Windows.Forms.Label button_7;
-        private System.Windows.Forms.Label button_Plus;
+        private System.Windows.Forms.Label button_Add;
         private System.Windows.Forms.Label button_3;
         private System.Windows.Forms.Label button_2;
         private System.Windows.Forms.Label button_1;
-        private System.Windows.Forms.Label button_Minus;
+        private System.Windows.Forms.Label button_Substract;
         private System.Windows.Forms.Label button_6;
         private System.Windows.Forms.Label button_5;
         private System.Windows.Forms.Label button_4;
